@@ -1,0 +1,28 @@
+<div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Started On</th>
+            <th scope="col">Completed On</th>
+            <th scope="col">Kilometers</th>
+            <th scope="col">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let run of runs">
+            <td>{{ run.id }}</td>
+            <td>{{ run.title }}</td>
+            <td>{{ run.startedOn }}</td>
+            <td>{{ run.completedOn }}</td>
+            <td>{{ run.kilometers }}</td>
+            <td>{{ run.location }}</td>
+            <!-- <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
