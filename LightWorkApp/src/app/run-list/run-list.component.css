@@ -1,22 +1,29 @@
 .runs-list{
-    display:flex;
-    flex-direction: column;
+    /* display:flex;
+    flex-direction: column; */
+    margin-top : 02em;
+    display:grid;
+    grid-template-columns: 20% 60% 20%;
     text-align: center;
     margin-left: 10px;
     margin-right: 10px;
-}
-
-table {
-    border-collapse: collapse;
+    margin-bottom : 02em;
+    font-family:'Courier New', Courier, monospace;
 }
 
 th, td {
-    width:130px;
-    text-align: center;
+    width:200px;
     padding:5px
 }
 
+
+
 .runs-table{
-    border-collapse:separate;
+    align-items: center;
+    display:flex;
+    flex-direction:column;
+    height:75vh;
+    border: 3px solid ;
+    border-color: #3aafa9;
     border-spacing:0 15px;
 }
