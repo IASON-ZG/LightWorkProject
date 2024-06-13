@@ -1,0 +1,22 @@
+.runs-list{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    width:130px;
+    text-align: center;
+    padding:5px
+}
+
+.runs-table{
+    border-collapse:separate;
+    border-spacing:0 15px;
+}

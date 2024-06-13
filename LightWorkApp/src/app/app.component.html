@@ -7,7 +7,7 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<style>
+<!-- <style>
   :host {
     --bright-blue: oklch(51.01% 0.274 263.83);
     --electric-violet: oklch(53.18% 0.28 296.97);
@@ -61,7 +61,7 @@
     color: var(--gray-700);
   }
 
-  main {
+  /* main {
     width: 100%;
     min-height: 100%;
     display: flex;
@@ -70,7 +70,7 @@
     padding: 1rem;
     box-sizing: inherit;
     position: relative;
-  }
+  } */
 
   .angular-logo {
     max-width: 9.2rem;
@@ -175,29 +175,30 @@
       margin-block: 1.5rem;
     }
   }
-</style>
-
+</style> -->
 <main class="main">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card bg-dark my-5">
-          <div class="card-body">
-            <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
-            <ul class="text-center list-inline py-3">
-              <li class="list-inline-item">
-                <a routerLink="/runs" class="btn btn-info">List Runs</a>
-                  </li>
-              <li class="list-inline-item">
-                <a routerLink="/addrun" class="btn btn-info">Add Run</a>
-                  </li>
-            </ul>
-          </div>
-        </div>
-        <router-outlet></router-outlet>
+    <div class="card-body">
+      <div class="spacing">
+        <img class="logo" src="assets/gym.png" alt="LightWork logo">
+      </div>
+      <div class="menu">
+        <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
+        <!-- <ul class="option">
+          <li class="list-inline-item"> -->
+            <button routerLink="/runs" class="menu-buttons">
+              <p>List Runs</p>
+            </button>
+          <!-- </li> -->
+          <!-- <li class="list-inline-item"> -->
+            <button routerLink="/addrun" class="menu-buttons">
+              <!-- <a routerLink="/addrun" class="btn btn-info">Add Run</a> -->
+              <p>Add Run</p>
+            </button>
+          <!-- </li> -->
+        <!-- </ul> -->
       </div>
     </div>
-  </div>
+    <router-outlet></router-outlet>
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

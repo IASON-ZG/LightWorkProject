@@ -1,0 +1,22 @@
+form {
+    margin: 01em;
+}
+
+label{
+    margin:10 px;
+}
+
+input{
+    width:200px;
+}
+
+.run-form{
+    display:grid;
+    grid-template-columns: 20% 60% 20%;
+    margin: 01em;
+}
+
+.form-group{
+
+    margin:01em;
+}
