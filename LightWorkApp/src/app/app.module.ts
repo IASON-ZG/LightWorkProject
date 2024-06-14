@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { RunFormComponent } from './run-form/run-form.component';
 import { RunListComponent } from './run-list/run-list.component';
 import { RunService } from './run.service';
+import { BenchListComponent } from './bench-list/bench-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RunListComponent,
-    RunFormComponent
+    RunFormComponent,
+    BenchListComponent
   ],
   imports: [
     BrowserModule,

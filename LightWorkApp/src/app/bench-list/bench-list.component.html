@@ -1,0 +1,25 @@
+<div class="runs-list">
+    <div class="left-container">
+    </div>
+    <table class="runs-table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Kilos</th>
+          <th scope="col">Reps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bench of benches">
+          <td>{{ bench.id }}</td>
+          <td>{{ bench.title }}</td>
+          <td>{{ bench.kilos }}</td>
+          <td>{{ bench.reps}}</td>
+          <!-- <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td> -->
+        </tr>
+      </tbody>
+    </table>
+    <div class="right-container">
+    </div>
+  </div>
