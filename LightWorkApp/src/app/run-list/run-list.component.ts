@@ -10,14 +10,23 @@ import { RunService } from '../run.service';
 
 export class RunListComponent implements OnInit {
   runs: Run[];
+  username: string ;
 
   constructor(private runService: RunService){
     this.runs = [];
+    this.username = ''
   }
 
-  ngOnInit() {
-    this.runService.findAll().subscribe(data => {
-      this.runs = data;
-    })
+  ngOnInit() {  
+    this.username =localStorage.getItem('username') || '';
+    if (this.username != ''){
+      this.runService.findAll(this.username).subscribe(data => {
+            this.runs = data;
+          })
+    }
+
+
+
+
   }
 }

@@ -9,5 +9,7 @@ public record Bench(Integer id,
                     @Positive
                     Float kilos,
                     @Positive
-                    Integer reps) {
+                    Integer reps,
+                    @NotEmpty
+                    String username) {
 }

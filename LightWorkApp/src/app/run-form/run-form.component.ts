@@ -20,10 +20,12 @@ export class RunFormComponent {
   constructor( private route: ActivatedRoute,
       private router: Router, 
       private runService: RunService){
-          this.run = new Run('','', '','','','');
+          this.run = new Run('','', '','','','','');
       }
   
   onSubmit() {
+    this.run.username = localStorage.getItem('username') || '';
+    console.log('The new run that  i save is : ' + this.run)
     this.runService.save(this.run).subscribe(result => this.gotoRunList());
   }
 

@@ -20,8 +20,9 @@ public class RunController {
     }
 
     @GetMapping("")
-    List<Run> findAll(){
-        return runRepository.findAll();
+    List<Run> findAll(@RequestParam("username") String username){
+        System.out.println("user i am getting the runs for is : "+ username);
+        return runRepository.findByUser(username);
     }
 
     @GetMapping("/{id}")

@@ -8,13 +8,17 @@ import { RunFormComponent } from './run-form/run-form.component';
 import { RunListComponent } from './run-list/run-list.component';
 import { RunService } from './run.service';
 import { BenchListComponent } from './bench-list/bench-list.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RunListComponent,
     RunFormComponent,
-    BenchListComponent
+    BenchListComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

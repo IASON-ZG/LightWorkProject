@@ -30,15 +30,15 @@ public class RunRepository {
     }
 
     public Optional<Run> findById(Integer id) {
-        return jdbcClient.sql("SELECT id,title,started_on,completed_on,kilometers,location FROM Run WHERE id = :id" )
+        return jdbcClient.sql("SELECT id,title,started_on,completed_on,kilometers,location,username FROM Run WHERE id = :id" )
                 .param("id", id)
                 .query(Run.class)
                 .optional();
     }
 
     public void create(Run run) {
-        var updated = jdbcClient.sql("INSERT INTO Run(id,title,started_on,completed_on,kilometers,location) values(?,?,?,?,?,?)")
-                .params(List.of(run.id(),run.title(),run.startedOn(),run.completedOn(),run.kilometers(),run.location().toString()))
+        var updated = jdbcClient.sql("INSERT INTO Run(id,title,started_on,completed_on,kilometers,location,username) values(?,?,?,?,?,?,?)")
+                .params(List.of(run.id(),run.title(),run.startedOn(),run.completedOn(),run.kilometers(),run.location().toString(),run.username()))
                 .update();
 
         Assert.state(updated == 1, "Failed to create run " + run.title());
@@ -68,52 +68,12 @@ public class RunRepository {
         runs.stream().forEach(this::create);
     }
 
-    public List<Run> findByLocation(String location) {
-        return jdbcClient.sql("select * from run where location = :location")
-                .param("location", location)
+    public List<Run> findByUser(String username) {
+        System.out.println("The user i am searching the runs for is : " + username);
+        return jdbcClient.sql("select * from run where username = :username")
+                .param("username", username)
                 .query(Run.class)
                 .list();
     }
-
-
-//    private List<Run> runs = new ArrayList<>();
-
-//    List<Run> findAll(){
-//        return runs;
-//    }
-//
-//   Optional<Run> findById(Integer id){
-//        return runs.stream().filter(run -> run.id() == id)
-//                .findFirst();
-//    }
-//
-//    void create(Run run){
-//        runs.add(run);
-//    }
-//
-//    void update(Run run, Integer id){
-//        Optional<Run> existingRun = findById(id);
-//        if(existingRun.isPresent()){
-//            runs.set(runs.indexOf(existingRun.get()),run);
-//        }
-//    }
-//
-//    public void delete(Integer id) {
-//        Optional<Run> existingRun = findById(id);
-//        if(existingRun.isPresent()){
-//            runs.remove(runs.indexOf(existingRun.get()));
-//        }
-//    }
-//
-//
-//    @PostConstruct
-//    private void init(){
-//        runs.add(new Run(1,"Monday first run", LocalDateTime.now(),
-//        LocalDateTime.now().plusMinutes(30),2,Location.OUTDOOR));
-//
-//        runs.add(new Run(2,"Tuesday first run", LocalDateTime.now(),
-//        LocalDateTime.now().plusMinutes(40),3,Location.OUTDOOR));
-//
-//    }
 
 }

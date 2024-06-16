@@ -12,18 +12,35 @@
 }
 
 th, td {
-    width:200px;
-    padding:5px
+    padding:5px;
 }
 
+thead{
+    width: 100%;
+    text-align: center;
+}
 
 
 .runs-table{
     align-items: center;
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     height:75vh;
     border: 3px solid ;
     border-color: #3aafa9;
     border-spacing:0 15px;
+}
+
+button{
+    font-family:'Courier New', Courier, monospace;
+    border: 1px solid black;
+    color:white;
+    background-color: red;
+    align-self:  end;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 80px;
+    height: 40px;
 }

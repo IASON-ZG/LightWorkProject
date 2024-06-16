@@ -13,7 +13,8 @@ public record Run(Integer id,
                   LocalDateTime completedOn,
                   @Positive
                   Integer kilometers,
-                  Location location) {
+                  Location location,
+                  String username) {
     public Run{
         if(!completedOn.isAfter(startedOn)){
             throw new IllegalArgumentException("Completed on must be after started on!");
