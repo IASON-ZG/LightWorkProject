@@ -16,11 +16,13 @@ import { FormsModule }   from '@angular/forms';
 export class RunFormComponent {
 
   run: Run;
+  username: String = '';
 
   constructor( private route: ActivatedRoute,
       private router: Router, 
       private runService: RunService){
           this.run = new Run('','', '','','','','');
+          this.username = localStorage.getItem('username') || ''
       }
   
   onSubmit() {

@@ -1,28 +1,56 @@
-<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-    <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-        <label for="username">Username</label>
-        <input type="text"
-          name="username" [(ngModel)]="user.username"
-            #username="ngModel" required />
-        <div *ngIf="f.submitted
-          && !username.valid">Username is required</div>
-    </div>
-    <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-        <label for="password">Password</label>
-        <input type="password"
-          name="password" [(ngModel)]="user.password"
-            #password="ngModel" required />
-        <div *ngIf="f.submitted
-          && !password.valid">Password is required</div>
-    </div>
-    <div>
-        <!-- <button [disabled]="loading">Login</button> -->
-        <button>Login</button>
-    </div>
 
-    <div>
-      <p>Don't have an account ?
-      <a routerLink="/register" class="btn btn-info">Register now!</a>
-      </p>
+<!-- <container-element [ngSwitch]= "username"> -->
+<div class="body">
+  @switch(username){
+    @case(""){
+    <div class ='form'>
+      <div >
+
+      </div>
+     <form class="form-info" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+      <h3>Welcome to LightWork!</h3>
+        <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label for="username">Username</label>
+            <br>
+            <input type="text"
+              name="username" [(ngModel)]="user.username"
+                #username="ngModel" required />
+            <div *ngIf="f.submitted
+              && !username.valid">Username is required</div>
+        </div>
+        <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label for="password">Password</label>
+            <br>
+            <input type="password"
+              name="password" [(ngModel)]="user.password"
+                #password="ngModel" required />
+            <div *ngIf="f.submitted
+              && !password.valid">Password is required</div>
+        </div>
+        <br>
+        <div>
+            <!-- <button [disabled]="loading">Login</button> -->
+            <button>Login</button>
+        </div>
+
+        <div>
+          <p>Don't have an account ?
+          <a routerLink="/register" class="btn btn-info">Register now!</a>
+          </p>
+        </div>
+      </form>
+      <div >
+        
+      </div>
     </div>
-</form>
+  }
+  @default{
+  <div class="welcome-message">
+    <h1> Welcome Back {{getUsername() }} !</h1>
+    <br>
+    <button class="logout-button" (click)="logout()"> Logout </button>
+
+  </div>
+  } 
+}
+</div>

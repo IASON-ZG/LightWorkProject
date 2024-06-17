@@ -14,25 +14,41 @@ import { User } from '../user';
 export class LoginComponent {
   model: any = {};
   user: User;
+  username: string = "";
 
   constructor(
       private route: ActivatedRoute,
       private router: Router,
       private http: HttpClient,
       private userService: UserService
-  ) {this.user = new User('','') }
+  ) {this.user = new User('','') ;
+    this.username = localStorage.getItem('username') || ""
+  }
+
+  getUsername(){
+    console.log("my username is  :" + this.username)
+    return this.username;
+  }
 
 
   login(){
-    console.log('user info is : ' + this.user.username + ' password :' + this.user.password)
+    console.log('user info is : ' + this.user.username + ' password : ' + this.user.password)
     this.userService.confirmUser(this.user).subscribe(result => {if (result == true){
-      this.gotoRunList()
+      localStorage.setItem('username',this.user.username);
+      this.username = this.user.username;
+      this.gotoRunList();
     }});
   }
   gotoRunList(){
     localStorage.setItem('username',this.user.username)
-    console.log('local storage is : ' + localStorage.getItem('username'))
+    this.username
+    // console.log('local storage is : ' + localStorage.getItem('username'))
     this.router.navigate(['/runs'])
+  }
+
+  logout(){
+    localStorage.clear();
+    location.reload();
   }
 
   // ngOnInit() {

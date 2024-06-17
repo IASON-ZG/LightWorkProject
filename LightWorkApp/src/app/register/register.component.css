@@ -1,0 +1,16 @@
+
+
+.form{
+    font-family:'Courier New', Courier, monospace;
+    display:grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.form-info{
+    text-align: center;
+    margin-top:10%;
+}
+
+.form-info > div {
+    padding:10px;
+}

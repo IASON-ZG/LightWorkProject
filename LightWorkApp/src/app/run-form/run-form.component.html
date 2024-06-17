@@ -72,6 +72,9 @@
         </div>
         <button type="submit" [disabled]="!runForm.form.valid" 
           class="submit-button">Submit</button>
+        <br>
+        <br>
+        <div class="run-create-error"  [(ngModel)]="username" *ngIf="username ==''" class="alert alert-danger">You have to login first!</div>
       </form>
     </div>
     <div class="right-container">

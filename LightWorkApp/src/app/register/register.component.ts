@@ -21,25 +21,6 @@ export class RegisterComponent {
       private userService: UserService
   ) { this.user = new User('','') }
 
-  // ngOnInit() {
-  //     sessionStorage.setItem('token', '');
-  // }
-
-  // register() {
-  //     let url = 'http://localhost:8085/register';
-  //     let result = this.http.post<Observable<boolean>>(url, {
-  //         userName: this.model.username,
-  //         password: this.model.password
-  //       }).subscribe(isValid => {
-  //         if (isValid) {
-  //           alert('User created!');
-  //     this.router.navigate(['']);
-  //       } else {
-  //           alert("Username already exists.")
-  //       }
-  //   });
-  // }
-
   register(){
     this.userService.save(this.user).subscribe(result => this.gotoRunList());
   }
