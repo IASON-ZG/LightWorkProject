@@ -23,25 +23,33 @@ public class RunRepository {
     }
 
 
-    public List<Run> findAll(){
-        return jdbcClient.sql("select * from run")
-                .query(Run.class)
-                .list();
+    public boolean checkUser(String username){
+        var checking = jdbcClient.sql("select username from Users where username = ?")
+                .param(username)
+                .update();
+        return (checking == 1);
     }
 
-    public Optional<Run> findById(Integer id) {
-        return jdbcClient.sql("SELECT id,title,started_on,completed_on,kilometers,location,username FROM Run WHERE id = :id" )
-                .param("id", id)
-                .query(Run.class)
-                .optional();
+
+    public List<Run> findByUser(String username) {
+        if (checkUser(username)){
+            return jdbcClient.sql("select * from run where username = :username")
+                    .param("username", username)
+                    .query(Run.class)
+                    .list();
+        }
+        return null;
     }
 
     public void create(Run run) {
-        var updated = jdbcClient.sql("INSERT INTO Run(id,title,started_on,completed_on,kilometers,location,username) values(?,?,?,?,?,?,?)")
-                .params(List.of(run.id(),run.title(),run.startedOn(),run.completedOn(),run.kilometers(),run.location().toString(),run.username()))
-                .update();
-
-        Assert.state(updated == 1, "Failed to create run " + run.title());
+        if (checkUser(run.username())){
+            var updated = jdbcClient.sql("INSERT INTO Run(id,title,started_on,completed_on,kilometers,location,username) values(?,?,?,?,?,?,?)")
+                    .params(List.of(run.id(),run.title(),run.startedOn(),run.completedOn(),run.kilometers(),run.location().toString(),run.username()))
+                    .update();
+            Assert.state(updated == 1, "Failed to create run " + run.title());
+            return;
+        }
+        Assert.state(false, "User does not exist");
     }
 
     public void update(Run run, Integer id) {
@@ -52,28 +60,37 @@ public class RunRepository {
         Assert.state(updated == 1, "Failed to update run " + run.title());
     }
 
-    public void delete(Integer id) {
-        var updated = jdbcClient.sql("delete from run where id = :id")
-                .param("id", id)
-                .update();
-
-        Assert.state(updated == 1, "Failed to delete run " + id);
+    public boolean delete(Integer id, String username) {
+        if (checkUser(username)){
+            var delete = jdbcClient.sql("delete from run where id = :id AND username = :username")
+                    .param("id", id)
+                    .param("username",username)
+                    .update();
+            Assert.state(delete == 1, "Failed to delete run " + id);
+            return (delete == 1);
+        }
+        return false;
     }
 
-    public int count() {
-        return jdbcClient.sql("select * from run").query().listOfRows().size();
-    }
+//    public int count() {
+//        return jdbcClient.sql("select * from run").query().listOfRows().size();
+//    }
+//
+//    public void saveAll(List<Run> runs) {
+//        runs.stream().forEach(this::create);
+//    }
 
-    public void saveAll(List<Run> runs) {
-        runs.stream().forEach(this::create);
-    }
+    //    public List<Run> findAll(){
+//        return jdbcClient.sql("select * from run")
+//                .query(Run.class)
+//                .list();
+//    }
 
-    public List<Run> findByUser(String username) {
-        System.out.println("The user i am searching the runs for is : " + username);
-        return jdbcClient.sql("select * from run where username = :username")
-                .param("username", username)
-                .query(Run.class)
-                .list();
-    }
+//    public Optional<Run> findById(Integer id) {
+//        return jdbcClient.sql("SELECT id,title,started_on,completed_on,kilometers,location,username FROM Run WHERE id = :id" )
+//                .param("id", id)
+//                .query(Run.class)
+//                .optional();
+//    }
 
 }

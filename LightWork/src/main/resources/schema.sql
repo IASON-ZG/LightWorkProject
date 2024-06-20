@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Run(
     kilometers INT NOT NULL,
     location varchar(10) NOT NULL,
     username varchar(250) NOT NULL,
-    PRIMARY KEY (id)
+    CONSTRAINT PK_run PRIMARY KEY (id,username)
 );
 
 CREATE TABLE IF NOT EXISTS Bench(

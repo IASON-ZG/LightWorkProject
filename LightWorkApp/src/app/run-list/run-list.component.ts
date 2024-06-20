@@ -24,9 +24,16 @@ export class RunListComponent implements OnInit {
             this.runs = data;
           })
     }
-
-
-
-
   }
+
+  delete(run : Run){
+    this.runService.delete(run.id,run.username).subscribe(data => {
+      console.log(data)
+      if (data == true){
+        console.log('deleted successfull')
+        window.location.reload();
+      }
+    })
+    }
+
 }

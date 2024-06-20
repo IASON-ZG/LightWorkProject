@@ -3,7 +3,6 @@ package com.example.Lightwork.run;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.coyote.Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,19 +20,8 @@ public class RunController {
 
     @GetMapping("")
     List<Run> findAll(@RequestParam("username") String username){
-        System.out.println("user i am getting the runs for is : "+ username);
         return runRepository.findByUser(username);
     }
-
-    @GetMapping("/{id}")
-    Run findById(@PathVariable Integer id){
-        Optional<Run> run = runRepository.findById(id);
-        if (run.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return run.get();
-    }
-    
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     void create (@RequestBody Run run){
@@ -46,13 +34,19 @@ public class RunController {
         runRepository.update(run,id);
     }
 
-
-    //delete
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    void delete(@PathVariable Integer id){
-        runRepository.delete(id);
+    Boolean delete(@PathVariable Integer id,@RequestParam("username") String username){
+        return runRepository.delete(id,username);
     }
 
+
+    //    @GetMapping("/{id}")
+//    Run findById(@PathVariable Integer id){
+//        Optional<Run> run = runRepository.findById(id);
+//        if (run.isEmpty()){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+//        }
+//        return run.get();
+//    }
 
 }

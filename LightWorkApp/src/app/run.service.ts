@@ -16,15 +16,19 @@ export class RunService {
   }
 
   public findAll(username: string): Observable<Run[]> {
-    // return this.http.get<Run[]>(this.runsUrl,username);
     let params = new HttpParams();
     params = params.append('username',username);
-    console.log('params to get all the runs : ' + params)
     return this.http.get<Run[]>(this.runsUrl, {params : params})
   }
 
   public save(run: Run){
     return this.http.post<Run>(this.runsUrl,run)
+  }
+
+  public delete(id : string,username : string): Observable<boolean>{
+    let params = new HttpParams();
+    params = params.append('username',username)
+    return this.http.delete<boolean>(this.runsUrl +'/'+ id, {params : params})
   }
 
 }

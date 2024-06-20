@@ -1,0 +1,60 @@
+<div class="bench-form">
+    <div class="left-container">
+    </div>
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" #benchForm="ngForm">
+          <div class="form-group">
+            <label for="id">ID</label>
+            <br>
+            <input type="text" [(ngModel)]="bench.id" 
+              class="form-control" 
+              id="id" 
+              name="id" 
+              placeholder="Enter the ID"
+              required #id="ngModel">
+          <div [hidden]="!id.pristine" class="alert alert-danger">Id is required</div>
+          </div>
+          <div class="form-group">
+            <label for="name">Title</label>
+            <br>
+            <input type="text" [(ngModel)]="bench.title" 
+              class="form-control" 
+              id="title" 
+              name="title" 
+              placeholder="Enter your title"
+              required #title="ngModel">
+            <div [hidden]="!title.pristine" class="alert alert-danger">Title is required</div>
+          </div>
+          <div class="form-group">
+            <label for="kilos">Kilos</label>
+            <br>
+            <input type="number" [(ngModel)]="bench.kilos" 
+              class="form-control" 
+              id="kilos" 
+              name="kilos" 
+              placeholder="Enter the kilos"
+              required #kilos="ngModel">
+            <div [hidden]="!kilos.pristine" class="alert alert-danger">Kilos are required</div>
+          </div>
+          <div class="form-group">
+            <label for="reps">Reps</label>
+            <br>
+            <input type="number" [(ngModel)]="bench.reps" 
+              class="form-control" 
+              id="reps" 
+              name="reps" 
+              placeholder="Enter the reps"
+              required #reps="ngModel">
+            <div [hidden]="!reps.pristine" class="alert alert-danger">Reps are required</div>
+          </div>
+          <button type="submit" [disabled]="!benchForm.form.valid" 
+            class="submit-button">Submit</button>
+          <br>
+          <br>
+          <div class="bench-create-error"  [(ngModel)]="username" *ngIf="username ==''" class="alert alert-danger">You have to login first!</div>
+        </form>
+      </div>
+      <div class="right-container">
+  
+      </div>
+    </div>
