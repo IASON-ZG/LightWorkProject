@@ -21,18 +21,8 @@ public class BenchController {
     }
 
     @GetMapping("")
-    List<Bench> findAll(){
-        return benchRepository.findAll();
-    }
-
-
-    @GetMapping("/{id}")
-    Bench findById(@PathVariable Integer id){
-        Optional<Bench> bench = benchRepository.findById(id);
-        if (bench.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return bench.get();
+    List<Bench> findAll(@RequestParam("username") String username){
+        return benchRepository.findByUser(username);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -51,8 +41,8 @@ public class BenchController {
     //delete
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    void delete(@PathVariable Integer id){
-        benchRepository.delete(id);
+    void delete(@PathVariable Integer id,@RequestParam("username") String username) {
+        benchRepository.delete(id,username);
     }
 
 

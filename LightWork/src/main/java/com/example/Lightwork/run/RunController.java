@@ -38,15 +38,4 @@ public class RunController {
     Boolean delete(@PathVariable Integer id,@RequestParam("username") String username){
         return runRepository.delete(id,username);
     }
-
-
-    //    @GetMapping("/{id}")
-//    Run findById(@PathVariable Integer id){
-//        Optional<Run> run = runRepository.findById(id);
-//        if (run.isEmpty()){
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-//        }
-//        return run.get();
-//    }
-
 }

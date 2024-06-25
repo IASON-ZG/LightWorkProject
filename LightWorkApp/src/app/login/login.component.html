@@ -32,7 +32,7 @@
             <!-- <button [disabled]="loading">Login</button> -->
             <button>Login</button>
         </div>
-
+        <div [hidden]="!this.failed" class="alert">Wrong credentials!</div>
         <div>
           <p>Don't have an account ?
           <a routerLink="/register" class="btn btn-info">Register now!</a>

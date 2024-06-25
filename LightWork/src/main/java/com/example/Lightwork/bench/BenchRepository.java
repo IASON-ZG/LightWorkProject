@@ -2,6 +2,7 @@ package com.example.Lightwork.bench;
 
 import com.example.Lightwork.bench.Bench;
 import com.example.Lightwork.bench.BenchRepository;
+import com.example.Lightwork.run.Run;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -21,25 +22,34 @@ public class BenchRepository {
         this.jdbcClient= jdbcClient;
     }
 
-    public List<Bench> findAll(){
-        return jdbcClient.sql("select * from bench")
-                .query(Bench.class)
-                .list();
+    public boolean checkUser(String username) {
+        var checking = jdbcClient.sql("select username from Users where username = ?")
+                .param(username)
+                .query(Boolean.class).stream().count();
+        return (checking == 1);
     }
 
-    public Optional<Bench> findById(Integer id) {
-        return jdbcClient.sql("SELECT id,title,kilos,reps FROM bench WHERE id = :id" )
-                .param("id", id)
-                .query(Bench.class)
-                .optional();
+
+    public List<Bench> findByUser(String username) {
+        if (checkUser(username)){
+            return jdbcClient.sql("select * from bench where username = :username")
+                    .param("username", username)
+                    .query(Bench.class)
+                    .list();
+        }
+        return null;
     }
+
 
     public void create(Bench bench) {
-        var updated = jdbcClient.sql("INSERT INTO bench(id,title,kilos,reps) values(?,?,?,?,?,?)")
-                .params(List.of(bench.id(),bench.title(),bench.kilos(),bench.reps()))
-                .update();
-
-        Assert.state(updated == 1, "Failed to create bench " + bench.title());
+        if (checkUser(bench.username())) {
+            var updated = jdbcClient.sql("INSERT INTO bench(id,title,kilos,reps,username) values(?,?,?,?,?)")
+                    .params(List.of(bench.id(), bench.title(), bench.kilos(), bench.reps(), bench.username()))
+                    .update();
+            Assert.state(updated == 1, "Failed to create bench " + bench.title());
+            return ;
+        }
+        Assert.state(false, "User does not exist");
     }
 
     public void update(Bench bench, Integer id) {
@@ -50,12 +60,15 @@ public class BenchRepository {
         Assert.state(updated == 1, "Failed to update bench " + bench.title());
     }
 
-    public void delete(Integer id) {
-        var updated = jdbcClient.sql("delete from bench where id = :id")
-                .param("id", id)
-                .update();
-
-        Assert.state(updated == 1, "Failed to delete bench " + id);
-    }    
-
+    public void delete(Integer id,  String username) {
+        if (checkUser(username)) {
+            var delete = jdbcClient.sql("delete from bench where id = :id AND username = :username")
+                    .param("id", id)
+                    .param("username",username)
+                    .update();
+            Assert.state(delete== 1, "Failed to delete bench " + id);
+//            return (delete == 1);
+        }
+//        return false;
+    }
 }

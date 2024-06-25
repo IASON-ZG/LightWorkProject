@@ -34,3 +34,7 @@
 .form-info > div {
     padding:10px;
 }
+
+.alert{
+    color:red;
+}

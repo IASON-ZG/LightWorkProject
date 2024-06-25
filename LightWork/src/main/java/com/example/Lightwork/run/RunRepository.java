@@ -24,9 +24,10 @@ public class RunRepository {
 
 
     public boolean checkUser(String username){
-        var checking = jdbcClient.sql("select username from Users where username = ?")
+        var checking = jdbcClient.sql("select count(*) from Users where username = ?")
                 .param(username)
-                .update();
+                .query(Integer.class).single();
+        System.out.println(checking);
         return (checking == 1);
     }
 

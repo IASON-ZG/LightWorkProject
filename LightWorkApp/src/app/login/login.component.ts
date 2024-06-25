@@ -15,6 +15,7 @@ export class LoginComponent {
   model: any = {};
   user: User;
   username: string = "";
+  failed: boolean;
 
   constructor(
       private route: ActivatedRoute,
@@ -22,7 +23,8 @@ export class LoginComponent {
       private http: HttpClient,
       private userService: UserService
   ) {this.user = new User('','') ;
-    this.username = localStorage.getItem('username') || ""
+    this.username = localStorage.getItem('username') || "";
+    this.failed = false;
   }
 
   getUsername(){
@@ -37,6 +39,9 @@ export class LoginComponent {
       localStorage.setItem('username',this.user.username);
       this.username = this.user.username;
       this.gotoRunList();
+    }else{
+      this.failed = true;
+      console.log("failed " + this.failed)
     }});
   }
   gotoRunList(){
@@ -49,6 +54,10 @@ export class LoginComponent {
   logout(){
     localStorage.clear();
     location.reload();
+  }
+
+  ngOnchanges(){
+    
   }
 
   // ngOnInit() {
